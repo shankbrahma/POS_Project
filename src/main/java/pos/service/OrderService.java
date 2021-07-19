@@ -3,17 +3,12 @@ package pos.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pos.dao.InventoryDao;
 import pos.dao.OrderDao;
 import pos.dao.OrderItemDao;
-import pos.dao.ProductDao;
 import pos.pojo.BrandPojo;
 import pos.pojo.OrderItemPojo;
 import pos.pojo.OrderPojo;
 import pos.pojo.ProductPojo;
-
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,7 +69,8 @@ public class OrderService {
     //get order items for a given order id
     @Transactional
     public List<OrderItemPojo> getOrderItems(int orderId) throws ApiException {
-        OrderPojo orderPojo=checkIfExistsOrder(orderId);
+        @SuppressWarnings("unused")
+		OrderPojo orderPojo=checkIfExistsOrder(orderId);
         return orderItemDao.getFromOrderId(orderId);
     }
 

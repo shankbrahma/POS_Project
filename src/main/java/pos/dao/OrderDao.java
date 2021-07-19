@@ -1,8 +1,6 @@
 package pos.dao;
 
 import org.springframework.stereotype.Repository;
-import pos.pojo.BrandPojo;
-import pos.pojo.OrderItemPojo;
 import pos.pojo.OrderPojo;
 
 import javax.persistence.EntityManager;

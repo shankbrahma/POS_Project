@@ -84,7 +84,7 @@ public class ProductController extends ExceptionHandler{
         productService.update(id, DataConversionUtil.convert(productForm,brandPojo));
     }
     
-    //Deletes a Product
+    //Deletes a Product record
     @ApiOperation(value = "Deletes a ProductDetails record")
 	@RequestMapping(path = "/api/product/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable int id) {

@@ -182,7 +182,7 @@ function uploadRows(){
 	return false;
 }
 
-function deleteBrand(id){
+function deleteInventory(id){
     console.log("delete id", id);
 	var url = getInventoryUrl() + "/" + id;
 
@@ -206,7 +206,7 @@ function displayInventoryList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var deleteButton = '<button onclick="deleteBrand(' + e.id + ')" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete</button>';
+		var deleteButton = '<button onclick="deleteInventory(' + e.id + ')" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete</button>';
 		var buttonHtml = ' <button class="btn btn-primary" onclick="displayEditInventory(' + e.id + ')">Edit</button>';
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'

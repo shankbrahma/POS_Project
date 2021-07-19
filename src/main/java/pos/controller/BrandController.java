@@ -57,7 +57,7 @@ public class BrandController extends ExceptionHandler{
         List<BrandPojo> brandPojoList = brandService.getAll();
         return DataConversionUtil.convert(brandPojoList);
     }
-    //Delete a brand
+    //Delete a brand record
     @ApiOperation(value = "Deletes an brand")
 	@RequestMapping(path = "/api/brand/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable int id) throws  ApiException{

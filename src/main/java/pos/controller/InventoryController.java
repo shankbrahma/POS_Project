@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pos.model.InventoryData;
 import pos.model.InventoryForm;
-import pos.pojo.BrandPojo;
 import pos.pojo.InventoryPojo;
 import pos.pojo.ProductPojo;
 import pos.service.ApiException;
@@ -79,7 +78,7 @@ public class InventoryController extends ExceptionHandler{
         InventoryPojo inventoryPojo= DataConversionUtil.convert(inventoryForm,productPojo);
         inventoryService.update(id, inventoryPojo);
     }
-    
+    //Deletes an inventory
     @ApiOperation(value = "Deletes an Inventory")
 	@RequestMapping(path = "/api/inventory/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable int id) {
