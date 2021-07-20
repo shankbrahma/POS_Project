@@ -2,9 +2,6 @@ package pos.dao;
 
 import org.springframework.stereotype.Repository;
 import pos.pojo.OrderPojo;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -14,30 +11,26 @@ import java.util.List;
 @Repository
 public class OrderDao extends AbstractDao{
 
-
-    @PersistenceContext
-    private EntityManager em;
-
     //Add order
     @Transactional
     public int insert(OrderPojo orderPojo){
-        em.persist(orderPojo);
-        em.flush();
+        em().persist(orderPojo);
         return orderPojo.getId();
     }
 
     @Transactional
+    //TODO
     public void update(int id,OrderPojo orderPojo){
-        OrderPojo orderPojo1=em.find(OrderPojo.class,id);
+        OrderPojo orderPojo1=em().find(OrderPojo.class,id);
         orderPojo1.setIsInvoiceGenerated(orderPojo.getIsInvoiceGenerated());
         orderPojo1.setDatetime(orderPojo.getDatetime());
-        em.merge(orderPojo1);
+        em().merge(orderPojo1);
     }
 
     //Retrieve an Order by id
     @Transactional
     public OrderPojo select(int id) {
-        return em.find(OrderPojo.class, id);
+        return em().find(OrderPojo.class, id);
     }
 
     //Retrieve all Orders

@@ -1,20 +1,22 @@
 package pos.pojo;
 
-import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
+
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"brand","category"})})
+//@Getter
+//@Setter
 public class BrandPojo {
 
-    @Id
+	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String brand;
     private String category;
-	public Integer getId() {
+    
+    public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
@@ -32,4 +34,6 @@ public class BrandPojo {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	
 }

@@ -1,6 +1,7 @@
 package pos.util;
 
 import pos.model.*;
+import pos.model.data.BrandData;
 import pos.pojo.*;
 import pos.service.ApiException;
 
@@ -76,7 +77,7 @@ public class DataConversionUtil {
         return inventoryData;
     }
 
-    //converts list of orderItemForms into list of orderItem pojo
+    //converts list of orderItemForms into list of OrderItemPojo
     public static List<OrderItemPojo> convertOrderItemForms(Map<String, ProductPojo> barcodeProduct,
                                                             OrderItemForm[] orderItemForms) throws ApiException {
         List<OrderItemPojo> orderItemPojoList = new ArrayList<>();

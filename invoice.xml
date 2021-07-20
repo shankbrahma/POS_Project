@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-    <order_id>1002</order_id>
-    <datetime>2021-07-15 12:05</datetime>
-    <total>200.0</total>
+    <order_id>1004</order_id>
+    <datetime>2021-07-20 18:32</datetime>
+    <total>121.0</total>
     <item>
-        <name>milk 200ml</name>
-        <mrp>20.0</mrp>
-        <quantity>2</quantity>
-    </item>
-    <item>
-        <name>dairymilk 200ml</name>
-        <mrp>40.0</mrp>
-        <quantity>4</quantity>
+        <name>n2</name>
+        <mrp>11.0</mrp>
+        <quantity>11</quantity>
     </item>
 </items>

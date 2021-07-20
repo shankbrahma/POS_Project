@@ -14,18 +14,15 @@ import java.util.List;
 @Repository
 public class InventoryDao extends AbstractDao{
 
-    @PersistenceContext
-    private EntityManager em;
-
     //Insert into table
     @Transactional
     public void insert(InventoryPojo inventoryPojo){
-        em.persist(inventoryPojo);
+        em().persist(inventoryPojo);
     }
 
     //Retrieve an inventory pojo with id
     public InventoryPojo select(int id){
-        return em.find(InventoryPojo.class,id);
+        return em().find(InventoryPojo.class,id);
     }
 
     //Retrieve list of inventory pojo
@@ -40,13 +37,14 @@ public class InventoryDao extends AbstractDao{
 
     //Update an inventory
     public void update(int id,InventoryPojo inventoryPojo) {
-        InventoryPojo inventoryPojo1=em.find(InventoryPojo.class, id);
+        InventoryPojo inventoryPojo1=em().find(InventoryPojo.class, id);
         inventoryPojo1.setProductId(inventoryPojo.getProductId());
         inventoryPojo1.setQuantity(inventoryPojo.getQuantity());
-        em.merge(inventoryPojo1);
+        em().merge(inventoryPojo1);
     }
 
     //get from product Id
+    //TODO rename
     public InventoryPojo getFromProductId(int productId){
         String select="select p from InventoryPojo p where productId=:productId";
         TypedQuery<InventoryPojo> query = getQuery(select, InventoryPojo.class);
@@ -59,11 +57,12 @@ public class InventoryDao extends AbstractDao{
             return null;
     }
 
+    @Transactional
     //delete an inventory
 	public void delete(int id) {
 		// TODO Auto-generated method stub
-		InventoryPojo p = em.find(InventoryPojo.class, id);
-		em.remove(p);
+		InventoryPojo p = em().find(InventoryPojo.class, id);
+		em().remove(p);
 		
 	}
 }

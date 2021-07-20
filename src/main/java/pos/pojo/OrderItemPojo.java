@@ -1,11 +1,7 @@
 package pos.pojo;
 
-import lombok.Data;
-
 
 import javax.persistence.*;
-
-@Data
 @Entity
 public class OrderItemPojo {
 
@@ -15,8 +11,10 @@ public class OrderItemPojo {
     @SequenceGenerator(name = "orderItemIdSequence",initialValue = 100000, allocationSize = 1, sequenceName = "orderItemId")
     private Integer id;
     private Integer quantity;
+    //TODO
     private Double sp;
     private Integer orderId;
+    //TODO
     private Integer ProductId;
 
     public Integer getId() {

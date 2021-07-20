@@ -1,9 +1,9 @@
 package pos.pojo;
 
-import lombok.Data;
+
 import javax.persistence.*;
 
-@Data
+
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"barcode"})})
 public class ProductPojo {
@@ -13,6 +13,9 @@ public class ProductPojo {
     private Integer id;
     private String barcode;
     private String name;
+    private Double mrp;
+    private Integer brandCategory;
+    
     public Integer getId() {
 		return id;
 	}
@@ -43,6 +46,5 @@ public class ProductPojo {
 	public void setBrandCategory(Integer brandCategory) {
 		this.brandCategory = brandCategory;
 	}
-	private Double mrp;
-    private Integer brandCategory;
+	
 }

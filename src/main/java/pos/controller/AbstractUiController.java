@@ -8,9 +8,12 @@ import pos.model.InfoData;
 
 @RestController
 public abstract class AbstractUiController {
+	
+	
     @Value("${app.baseUrl}")
     private String baseUrl;
 
+    
     protected ModelAndView mav(String page) {
         // Set info
         ModelAndView mav = new ModelAndView(page);

@@ -11,27 +11,12 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 public class InventoryServiceTest extends AbstractUnitTest{
-    //declare beforehand all pojo
+
+	
     @Before
     public void Declaration() throws ApiException {
         declare();
     }
-
-    //testing addition of an inventory
-    @Test
-    public void testAdd() throws ApiException {
-
-        InventoryPojo inventoryPojo = getInventoryPojo(productPojoList.get(2));
-        List<InventoryPojo> inventoryPojoList = inventoryService.getAll();
-        inventoryService.add(inventoryPojo);
-        List<InventoryPojo> inventoryPojoList1 = inventoryService.getAll();
-        assertEquals(inventoryPojoList.size() + 1, inventoryPojoList1.size());
-        assertEquals(inventoryPojo.getProductId(), inventoryService.get(inventoryPojo.getId()).getProductId());
-        assertEquals(inventoryPojo.getQuantity(), inventoryService.get(inventoryPojo.getId()).getQuantity());
-
-    }
-
-
 
     // Testing addition of an invalid pojo
     @Test()
@@ -85,6 +70,19 @@ public class InventoryServiceTest extends AbstractUnitTest{
         InventoryPojo inventoryPojo = inventoryService.get(inventoryPojoList.get(0).getId());
         assertEquals(inventoryPojoList.get(0).getProductId(), inventoryPojo.getProductId());
         assertEquals(inventoryPojoList.get(0).getQuantity(), inventoryPojo.getQuantity());
+
+    }
+    //testing addition of an inventory
+    @Test
+    public void testAdd() throws ApiException {
+
+        InventoryPojo inventoryPojo = getInventoryPojo(productPojoList.get(2));
+        List<InventoryPojo> inventoryPojoList = inventoryService.getAll();
+        inventoryService.add(inventoryPojo);
+        List<InventoryPojo> inventoryPojoList1 = inventoryService.getAll();
+        assertEquals(inventoryPojoList.size() + 1, inventoryPojoList1.size());
+        assertEquals(inventoryPojo.getProductId(), inventoryService.get(inventoryPojo.getId()).getProductId());
+        assertEquals(inventoryPojo.getQuantity(), inventoryService.get(inventoryPojo.getId()).getQuantity());
 
     }
 

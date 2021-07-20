@@ -226,6 +226,11 @@ function displayOrderItemListFrontend(data){
 		+ '</tr>';
         $tbody.append(row);
 	}
+	if(data.length > 0){
+	    $("#checkout").show();
+	} else{
+	    $("#checkout").hide();
+	}
 }
 
 function displayOrdersList(data) {
@@ -249,6 +254,7 @@ function displayOrdersList(data) {
 		invoice='<tr><td colspan="3"><table><tbody></tbody><tfoot><button class="btn btn-success" type="hidden" onclick="downloadPDF('+ e.id +')">Generate Invoice</button></tfoot></table></td></tr>'
 		$tbody.append(invoice);
 	}
+	
 }
 
 function displayEditOrderItem(id){
@@ -295,7 +301,7 @@ function displayOrderItem(data){
         		 console.log(response);
         				if(response.isInvoiceGenerated)
         				{
-        				toastr.warning("Invoice already generated");
+        				toastr.warning("Invoice is generated");
         				}
         				else
         				{

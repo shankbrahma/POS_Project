@@ -15,22 +15,19 @@ import java.util.List;
 @Repository
 public class BrandDao extends AbstractDao{
 
-    @PersistenceContext
-    private EntityManager entityManager;
-    
-    
+	
     private static String deleteById = "delete from BrandPojo p where id=:id";
 
     //Insert into table
     @Transactional
     public void insert(BrandPojo brandPojo){
-        entityManager.persist(brandPojo);
+        em().persist(brandPojo);
     }
 
     //Retrieve a brand pojo
     @Transactional
     public BrandPojo select(int id){
-        return entityManager.find(BrandPojo.class,id);
+        return em().find(BrandPojo.class,id);
     }
 
     //Retrieve all brand pojo
@@ -38,6 +35,7 @@ public class BrandDao extends AbstractDao{
     public List<BrandPojo> selectAll() {
         String selectAll = "select p from BrandPojo p";
         TypedQuery<BrandPojo> query = getQuery(selectAll,  BrandPojo.class);
+        //TODO
         if(query == null){
             return new ArrayList<>();
         }
@@ -47,14 +45,15 @@ public class BrandDao extends AbstractDao{
     //Update a brand with given brandId
     @Transactional
     public void update(int id,BrandPojo brandPojo) {
-        BrandPojo brandPojo1= entityManager.find(BrandPojo.class, id);
+        BrandPojo brandPojo1= em().find(BrandPojo.class, id);
         brandPojo1.setBrand(brandPojo.getBrand());
         brandPojo1.setCategory(brandPojo.getCategory());
-        entityManager.merge(brandPojo1);
+        em().merge(brandPojo1);
     }
 
     @Transactional
     //Retrieve brand pojo based in brand and category
+    //TODO rename
     public List<BrandPojo> getIdFromBrandCategory(String brand, String category){
         String selectBrandCategory = "select p from BrandPojo p where brand=:brand and category=:category";
         TypedQuery<BrandPojo> query = getQuery(selectBrandCategory, BrandPojo.class);
@@ -62,9 +61,10 @@ public class BrandDao extends AbstractDao{
         query.setParameter("category",category);
         return query.getResultList();
     }
+    
     @Transactional
     public int delete(int id) {
-		Query query = entityManager.createQuery(deleteById);
+		Query query = em().createQuery(deleteById);
 		query.setParameter("id", id);
 		return query.executeUpdate();
 	}

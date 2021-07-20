@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class OrderItemForm {
     private String barcode;
+	private Integer quantity;
+    private Double sp;
     public String getBarcode() {
 		return barcode;
 	}
@@ -23,6 +25,5 @@ public class OrderItemForm {
 	public void setSp(Double sp) {
 		this.sp = sp;
 	}
-	private Integer quantity;
-    private Double sp;
+
 }

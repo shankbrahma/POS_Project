@@ -48,7 +48,7 @@ public abstract class AbstractUnitTest {
         orderPojoList = new ArrayList<>();
         orderItemPojoList = new ArrayList<>();
 
-        for(int i=0; i<3; i++) {
+        for(int i=0; i<2; i++) {
             BrandPojo brand = new BrandPojo();
             brand.setBrand("brand");
             brand.setCategory("category"+i);

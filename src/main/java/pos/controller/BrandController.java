@@ -4,8 +4,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pos.model.BrandData;
+
 import pos.model.BrandForm;
+import pos.model.data.BrandData;
 import pos.pojo.BrandPojo;
 import pos.service.ApiException;
 import pos.service.BrandService;
@@ -17,6 +18,7 @@ import java.util.List;
 //Controls the brand page of the application
 @Api
 @RestController
+//@RequestMapping(path="/api/brand")
 public class BrandController extends ExceptionHandler{
 
     @Autowired
@@ -57,6 +59,7 @@ public class BrandController extends ExceptionHandler{
         List<BrandPojo> brandPojoList = brandService.getAll();
         return DataConversionUtil.convert(brandPojoList);
     }
+    
     //Delete a brand record
     @ApiOperation(value = "Deletes an brand")
 	@RequestMapping(path = "/api/brand/{id}", method = RequestMethod.DELETE)

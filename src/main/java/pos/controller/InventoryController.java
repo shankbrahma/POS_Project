@@ -81,7 +81,7 @@ public class InventoryController extends ExceptionHandler{
     //Deletes an inventory
     @ApiOperation(value = "Deletes an Inventory")
 	@RequestMapping(path = "/api/inventory/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable int id) {
+	public void delete(@PathVariable int id) throws ApiException{
     	inventoryService.delete(id);
 	}
 }

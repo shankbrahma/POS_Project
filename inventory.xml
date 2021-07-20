@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <inventory_items>
     <inventory_item>
-        <brand>amull</brand>
-        <category>milk</category>
-        <quantity>88</quantity>
+        <brand>brand1</brand>
+        <category>c1</category>
+        <quantity>111</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>amul</brand>
-        <category>choco</category>
-        <quantity>76</quantity>
-    </inventory_item>
-    <inventory_item>
-        <brand>nestle</brand>
-        <category>cofee</category>
-        <quantity>89</quantity>
+        <brand>brand2</brand>
+        <category>c2</category>
+        <quantity>0</quantity>
     </inventory_item>
 </inventory_items>

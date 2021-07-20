@@ -40,5 +40,5 @@ class UIController extends AbstractUiController{
     public ModelAndView ordering() {
         return mav("order.html");
     }
-
+    
 }

@@ -1,6 +1,7 @@
 package pos.model;
 
 import lombok.Data;
+import pos.model.data.BrandData;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

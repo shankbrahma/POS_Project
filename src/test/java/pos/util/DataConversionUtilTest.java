@@ -1,10 +1,12 @@
-package pos.service;
+package pos.util;
 
 import org.junit.Before;
 import org.junit.Test;
 import pos.model.*;
+import pos.model.data.BrandData;
 import pos.pojo.*;
-import pos.util.DataConversionUtil;
+import pos.service.AbstractUnitTest;
+import pos.service.ApiException;
 
 import java.util.HashMap;
 import java.util.List;

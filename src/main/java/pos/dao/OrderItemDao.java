@@ -5,11 +5,11 @@ import pos.pojo.OrderItemPojo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
-//Repository for orderItem
 @Repository
 public class OrderItemDao extends AbstractDao{
 
@@ -20,6 +20,8 @@ public class OrderItemDao extends AbstractDao{
     @Transactional
     public void insert(OrderItemPojo orderItemPojo){
         em.persist(orderItemPojo);
+//        Query query=em.createNativeQuery("INSERT INTO OrderItemPojo2 SELECT * FROM OrderItemPojo");
+//        query.executeUpdate();
     }
 
     //Select orderItem by id
@@ -28,6 +30,7 @@ public class OrderItemDao extends AbstractDao{
     }
 
     //Select all orderItems
+    //TODO
     public List<OrderItemPojo> selectAll() {
         String select_all = "select p from OrderItemPojo p";
         TypedQuery<OrderItemPojo> query = getQuery(select_all,  OrderItemPojo.class);
@@ -35,6 +38,7 @@ public class OrderItemDao extends AbstractDao{
     }
 
     //Get orderItems for same orderId
+    //TODO
     public List<OrderItemPojo> getFromOrderId(int orderId){
         String select_from_orderId = "select p from OrderItemPojo p where orderId=:orderId";
         TypedQuery<OrderItemPojo> query = getQuery(select_from_orderId,  OrderItemPojo.class);

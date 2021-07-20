@@ -125,17 +125,17 @@ public class OrderService {
 
     //Updates inventory for every added, updated or deleted order
     @Transactional(rollbackFor = ApiException.class)
-    protected void updateInventory(OrderItemPojo orderItemPojo, int old_qty) throws ApiException {
+    protected void updateInventory(OrderItemPojo orderItemPojo, int old_quantity) throws ApiException {
         int quantity = orderItemPojo.getQuantity();
         int quantityInInventory;
         try {
-            quantityInInventory = inventoryService.getFromProductId(orderItemPojo.getProductId()).getQuantity() + old_qty;
+            quantityInInventory = inventoryService.getFromProductId(orderItemPojo.getProductId()).getQuantity() + old_quantity;
         } catch (Exception e) {
             throw new ApiException("Inventory for this item does not exist " + productService.get(orderItemPojo.getProductId()).getBarcode());
         }
         if (quantity > quantityInInventory) {
             throw new ApiException(
-                    "he product inventory is: "
+                    "The current product inventory is: "
                             + quantityInInventory+" order cannot be placed more than that");
         }
         inventoryService.getFromProductId(orderItemPojo.getProductId()).setQuantity(quantityInInventory - quantity);

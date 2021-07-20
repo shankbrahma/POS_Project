@@ -1,11 +1,11 @@
 package pos.pojo;
 
-import lombok.Data;
+
 
 
 import javax.persistence.*;
 
-@Data
+
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"productId"})})
 public class InventoryPojo {

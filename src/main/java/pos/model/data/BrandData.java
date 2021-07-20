@@ -1,7 +1,8 @@
-package pos.model;
+package pos.model.data;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import pos.model.BrandForm;
 
 //Data about brand
 @EqualsAndHashCode(callSuper = true)

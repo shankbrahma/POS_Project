@@ -108,7 +108,7 @@ public class BrandService {
     }
 
     @Transactional
-	public void delete(int id) {
+	public void delete(int id) throws ApiException {
 		// TODO Auto-generated method stub
 		System.out.println(id);
 		List<ProductPojo> l=ps.getAll();

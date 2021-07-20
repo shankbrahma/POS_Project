@@ -6,7 +6,6 @@ pos\dao\InventoryDao.class
 pos\controller\AppController.class
 pos\spring\WebInitializer.class
 pos\controller\ExceptionHandler.class
-pos\controller\SampleController.class
 pos\model\ReportFilter.class
 pos\model\InventoryReportData.class
 pos\controller\OrderController.class
@@ -40,7 +39,6 @@ pos\pojo\BrandPojo.class
 pos\util\StringUtil.class
 pos\controller\AbstractUiController.class
 pos\util\DataConversionUtil.class
-pos\model\BrandData.class
 pos\util\PdfConversionUtil.class
 pos\service\OrderService.class
 pos\pojo\ProductPojo.class

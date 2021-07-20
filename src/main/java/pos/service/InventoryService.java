@@ -102,8 +102,9 @@ public class InventoryService {
         ProductPojo productPojo= productDao.select(inventoryPojo.getProductId());
         return brandDao.select(productPojo.getBrandCategory());
     }
+    
     @Transactional
-	public void delete(int id) {
+	public void delete(int id) throws ApiException{
 		// TODO Auto-generated method stub
 		inventoryDao.delete(id);
 	}

@@ -31,13 +31,12 @@ public class OrderController extends ExceptionHandler{
     private ProductService productService;
     
     //Adds an order
-    @ApiOperation(value = "Adds Order Details")
+    @ApiOperation(value = "Adds Order Items")
     @RequestMapping(path = "/api/order", method = RequestMethod.POST)
-    public OrderData add(@RequestBody OrderItemForm[] orderItemForms) throws ApiException{
+    public void add(@RequestBody OrderItemForm[] orderItemForms) throws ApiException{
         Map<String, ProductPojo> allProductPojoByBarcode = productService.getAllProductPojosByBarcode();
         List<OrderItemPojo> orderItemList = DataConversionUtil.convertOrderItemForms(allProductPojoByBarcode, orderItemForms);
-        int orderId = orderService.add(orderItemList);
-        return DataConversionUtil.convert(orderService.getOrder(orderId));
+        orderService.add(orderItemList);
     }
 
     //Adds an OrderItem to an existing order
@@ -85,7 +84,7 @@ public class OrderController extends ExceptionHandler{
     }
 
     //Get single order
-    @ApiOperation(value = "Gets list of Orders")
+    @ApiOperation(value = "Get list of a Order")
     @RequestMapping(path = "/api/singleOrder/{id}", method = RequestMethod.GET)
     public OrderData getSingleOrder(@PathVariable int id) throws ApiException {
         OrderPojo orderPojo= orderService.getOrder(id);

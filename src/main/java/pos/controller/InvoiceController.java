@@ -20,7 +20,7 @@ public class InvoiceController extends ExceptionHandler{
     @Autowired
     private ReportService reportService;
 
-    //Retrieves the invoice of an order from orderId
+    //Generates the invoice of an order from orderId
     @ApiOperation(value = "Gets Invoice PDF by id")
     @RequestMapping(path = "/api/invoice/{id}", method = RequestMethod.GET)
     public void get(@PathVariable int id, HttpServletResponse response) throws Exception {

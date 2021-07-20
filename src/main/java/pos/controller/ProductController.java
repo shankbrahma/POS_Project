@@ -87,7 +87,7 @@ public class ProductController extends ExceptionHandler{
     //Deletes a Product record
     @ApiOperation(value = "Deletes a ProductDetails record")
 	@RequestMapping(path = "/api/product/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable int id) {
+	public void delete(@PathVariable int id) throws ApiException {
     	productService.delete(id);
 	}
 }

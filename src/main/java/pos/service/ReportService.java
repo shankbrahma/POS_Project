@@ -3,6 +3,7 @@ package pos.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pos.model.*;
+import pos.model.data.BrandData;
 import pos.pojo.*;
 import pos.util.DataConversionUtil;
 import pos.util.PdfConversionUtil;

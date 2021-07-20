@@ -2,22 +2,42 @@
 <brands>
     <brand_item>
         <brand>amul</brand>
-        <category>choco</category>
-        <id>2</id>
+        <category>butter</category>
+        <id>7</id>
     </brand_item>
     <brand_item>
-        <brand>amull</brand>
+        <brand>amul</brand>
+        <category>dairy</category>
+        <id>8</id>
+    </brand_item>
+    <brand_item>
+        <brand>amul</brand>
         <category>milk</category>
-        <id>1</id>
-    </brand_item>
-    <brand_item>
-        <brand>nestle</brand>
-        <category>cofee</category>
         <id>3</id>
     </brand_item>
     <brand_item>
-        <brand>tata</brand>
-        <category>tea</category>
+        <brand>brand1</brand>
+        <category>c1</category>
+        <id>1</id>
+    </brand_item>
+    <brand_item>
+        <brand>brand2</brand>
+        <category>c2</category>
+        <id>2</id>
+    </brand_item>
+    <brand_item>
+        <brand>dabur</brand>
+        <category>health</category>
+        <id>9</id>
+    </brand_item>
+    <brand_item>
+        <brand>dairy</brand>
+        <category>milk</category>
+        <id>6</id>
+    </brand_item>
+    <brand_item>
+        <brand>nestle</brand>
+        <category>choco</category>
         <id>4</id>
     </brand_item>
 </brands>

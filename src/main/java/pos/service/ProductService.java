@@ -131,8 +131,10 @@ public class ProductService {
         productPojo.setName(StringUtil.toLowerCase(productPojo.getName()));
         productPojo.setBarcode(StringUtil.toLowerCase(productPojo.getBarcode()));
     }
+    
+    
     @Transactional
-	public void delete(int id) {
+	public void delete(int id) throws ApiException {
 		// TODO Auto-generated method stub
 		
 		List<InventoryPojo> l=in.getAll();

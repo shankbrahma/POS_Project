@@ -27,7 +27,7 @@ public class ProductDao extends AbstractDao{
         return em.find(ProductPojo.class,id);
     }
 
-    //Retrieve all orders
+    //Retrieve all products
     public List<ProductPojo> selectAll() {
         String select_all = "select p from ProductPojo p";
         TypedQuery<ProductPojo> query = getQuery(select_all,  ProductPojo.class);
@@ -35,6 +35,7 @@ public class ProductDao extends AbstractDao{
     }
 
     //Update a product pojo
+    //TODO
     public void update(int id,ProductPojo productPojo) {
         ProductPojo productPojo1=em.find(ProductPojo.class, id);
         productPojo1.setId(productPojo.getId());
@@ -57,10 +58,12 @@ public class ProductDao extends AbstractDao{
         else
             return null;
     }
-
+    
+    //TODO
+    @Transactional
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		ProductPojo p = em.find(ProductPojo.class, id);
-		em.remove(p);
+		em.remove(p);	
 	}
 }
