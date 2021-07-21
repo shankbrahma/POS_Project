@@ -1,6 +1,7 @@
-package pos.model;
+package pos.model.data;
 
 import lombok.Data;
+import pos.model.form.ProductForm;
 
 @Data
 public class ProductData extends ProductForm{

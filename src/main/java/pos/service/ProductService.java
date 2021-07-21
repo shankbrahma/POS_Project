@@ -28,7 +28,7 @@ public class ProductService {
     public void add(ProductPojo productPojo) throws ApiException{
         normalize(productPojo);
         check(productPojo);
-        ProductPojo productPojo1= productDao.getIdFromBarcode(productPojo.getBarcode());
+        ProductPojo productPojo1= productDao.selectIdFromBarcode(productPojo.getBarcode());
         if(productPojo1!=null) {
             throw new ApiException("Product with given barcode already exists: " + productPojo.getBarcode());
         }
@@ -97,7 +97,7 @@ public class ProductService {
     public ProductPojo checkBarcode(String barcode) throws ApiException {
         if(barcode==null)
             throw new ApiException("Barcode cannot be empty");
-        ProductPojo productPojo= productDao.getIdFromBarcode(barcode);
+        ProductPojo productPojo= productDao.selectIdFromBarcode(barcode);
         if(productPojo==null){
             throw new ApiException("Product with given barcode does not exist: "+ barcode);
         }
@@ -131,22 +131,5 @@ public class ProductService {
         productPojo.setName(StringUtil.toLowerCase(productPojo.getName()));
         productPojo.setBarcode(StringUtil.toLowerCase(productPojo.getBarcode()));
     }
-    
-    
-    @Transactional
-	public void delete(int id) throws ApiException {
-		// TODO Auto-generated method stub
-		
-		List<InventoryPojo> l=in.getAll();
-		for(int i=0;i<l.size();i++)
-		{
-			if(l.get(i).getId()==id)
-			{
-				int Iid=l.get(i).getId();
-				in.delete(Iid);
-				productDao.delete(id);
-			}
-		}
-	}
 
 }

@@ -1,12 +1,8 @@
-package pos.model;
+package pos.model.form;
 
-import lombok.Data;
 
-@Data
-public class OrderItemForm {
+public class InventoryForm {
     private String barcode;
-	private Integer quantity;
-    private Double sp;
     public String getBarcode() {
 		return barcode;
 	}
@@ -19,11 +15,5 @@ public class OrderItemForm {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public Double getSp() {
-		return sp;
-	}
-	public void setSp(Double sp) {
-		this.sp = sp;
-	}
-
+	private Integer quantity;
 }

@@ -1,4 +1,4 @@
-package pos.model;
+package pos.model.data;
 
 import lombok.Data;
 

@@ -1,14 +1,16 @@
 package pos.dao;
 
-import org.springframework.stereotype.Repository;
-import pos.pojo.InventoryPojo;
+import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import jdk.internal.org.jline.utils.Log;
+import pos.pojo.InventoryPojo;
+import pos.service.ApiException;
 
 //Repository for inventory
 @Repository
@@ -26,26 +28,28 @@ public class InventoryDao extends AbstractDao{
     }
 
     //Retrieve list of inventory pojo
-    public List<InventoryPojo> selectAll() {
+    public List<InventoryPojo> selectAll() throws ApiException {
         String select_all = "select p from InventoryPojo p";
-        TypedQuery<InventoryPojo> query = getQuery(select_all,  InventoryPojo.class);
-        if(query == null){
-            return new ArrayList<>();
-        }
+        
+        try
+        {
+        	TypedQuery<InventoryPojo> query = getQuery(select_all,  InventoryPojo.class);
         return query.getResultList();
+        }
+        catch(NoResultException e){
+        	Log.debug("No data found");
+        	throw new ApiException(e.getMessage());
+        }
     }
 
     //Update an inventory
     public void update(int id,InventoryPojo inventoryPojo) {
-        InventoryPojo inventoryPojo1=em().find(InventoryPojo.class, id);
-        inventoryPojo1.setProductId(inventoryPojo.getProductId());
-        inventoryPojo1.setQuantity(inventoryPojo.getQuantity());
-        em().merge(inventoryPojo1);
+
     }
 
     //get from product Id
     //TODO rename
-    public InventoryPojo getFromProductId(int productId){
+    public InventoryPojo selectByProductId(int productId){
         String select="select p from InventoryPojo p where productId=:productId";
         TypedQuery<InventoryPojo> query = getQuery(select, InventoryPojo.class);
         query.setParameter("productId", productId);
@@ -57,12 +61,4 @@ public class InventoryDao extends AbstractDao{
             return null;
     }
 
-    @Transactional
-    //delete an inventory
-	public void delete(int id) {
-		// TODO Auto-generated method stub
-		InventoryPojo p = em().find(InventoryPojo.class, id);
-		em().remove(p);
-		
-	}
 }

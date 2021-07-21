@@ -182,20 +182,6 @@ function uploadRows(){
 	return false;
 }
 
-function deleteInventory(id){
-    console.log("delete id", id);
-	var url = getInventoryUrl() + "/" + id;
-
-	$.ajax({
-	   url: url,
-	   type: 'DELETE',
-	   success: function(data) {
-	   		getInventoryList();
-	   },
-	   error: handleAjaxError
-	});
-}
-
 function downloadErrors(){
 	writeFileData(errorData);
 }
@@ -206,13 +192,11 @@ function displayInventoryList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var deleteButton = '<button onclick="deleteInventory(' + e.id + ')" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete</button>';
 		var buttonHtml = ' <button class="btn btn-primary" onclick="displayEditInventory(' + e.id + ')">Edit</button>';
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
 		+ '<td>'  + e.quantity + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
-		+ '<td>' + deleteButton + '</td>'
 		+ '</tr>';
         $tbody.append(row);
 	}

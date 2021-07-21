@@ -1,7 +1,8 @@
-package pos.model;
+package pos.model.data;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import pos.model.form.InventoryForm;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

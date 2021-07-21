@@ -1,8 +1,5 @@
-package pos.model;
+package pos.model.form;
 
-import lombok.Data;
-
-@Data
 public class ApiError {
     private Integer status;
     private String message;

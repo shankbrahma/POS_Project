@@ -1,10 +1,7 @@
-package pos.model;
-
-
-import lombok.Data;
+package pos.model.data;
 
 //Data about the application
-@Data
+
 public class AboutAppData {
 
     private String name;

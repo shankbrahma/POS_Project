@@ -1,9 +1,6 @@
-package pos.model;
-
-import lombok.Data;
+package pos.model.form;
 
 
-@Data
 public class BrandForm {
 
     private String brand;

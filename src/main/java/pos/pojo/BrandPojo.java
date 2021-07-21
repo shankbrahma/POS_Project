@@ -6,8 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"brand","category"})})
-//@Getter
-//@Setter
 public class BrandPojo {
 
 	@Id

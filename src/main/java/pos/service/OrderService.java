@@ -53,7 +53,7 @@ public class OrderService {
         check(orderItemPojo);
         OrderPojo orderPojo=orderDao.select(orderId);
         orderItemPojo.setOrderId(orderPojo.getId());
-        List<OrderItemPojo> orderItemPojoList =orderItemDao.getFromOrderId(orderId);
+        List<OrderItemPojo> orderItemPojoList =orderItemDao.selectByOrderId(orderId);
         for(OrderItemPojo orderItemPojo1 : orderItemPojoList) {
             if(productService.get(orderItemPojo1.getProductId()).getBarcode().equals(productService.get(orderItemPojo.getProductId()).getBarcode())){
                 orderItemPojo.setQuantity(orderItemPojo.getQuantity()+orderItemPojo1.getQuantity());
@@ -71,7 +71,7 @@ public class OrderService {
     public List<OrderItemPojo> getOrderItems(int orderId) throws ApiException {
         @SuppressWarnings("unused")
 		OrderPojo orderPojo=checkIfExistsOrder(orderId);
-        return orderItemDao.getFromOrderId(orderId);
+        return orderItemDao.selectByOrderId(orderId);
     }
 
     // Fetching an Order by id

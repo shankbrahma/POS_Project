@@ -42,21 +42,6 @@ function addBrand(event){
 	return false;
 }
 
-
-function deleteBrand(id){
-    console.log("delete id", id);
-	var url = getBrandUrl() + "/" + id;
-
-	$.ajax({
-	   url: url,
-	   type: 'DELETE',
-	   success: function(data) {
-	   		getBrandList();
-	   },
-	   error: handleAjaxError
-	});
-}
-
 function updateBrand(event){
 	$('#edit-brand-modal').modal('toggle');
 	//Get the ID
@@ -171,13 +156,11 @@ function displayBrandList(data){
 	$tbody.empty();
 	for(let i in data){
 		let e = data[i];
-		var deleteButton = '<button onclick="deleteBrand(' + e.id + ')" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete</button>';
 		var buttonHtml = ' <button class="btn btn-primary" title="Edit brand" onclick="displayEditBrand(' + e.id + ')">Edit</button>';
 		var row = '<tr>'
 		+ '<td>' + e.brand + '</td>'
 		+ '<td>'  + e.category + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
-		+ '<td>' + deleteButton + '</td>'
 		+ '</tr>';
         $tbody.append(row);
 	}

@@ -1,8 +1,6 @@
-package pos.model;
+package pos.model.form;
 
-import lombok.Data;
 
-@Data
 public class ReportFilter {
     private String startDate;
     private String endDate;

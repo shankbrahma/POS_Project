@@ -4,8 +4,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pos.model.ProductData;
-import pos.model.ProductForm;
+
+import pos.model.data.ProductData;
+import pos.model.form.ProductForm;
 import pos.pojo.BrandPojo;
 import pos.pojo.ProductPojo;
 import pos.service.ApiException;
@@ -20,6 +21,7 @@ import java.util.List;
 //Controls the products page of the application
 @Api
 @RestController
+@RequestMapping(path = "/api/product")
 public class ProductController extends ExceptionHandler{
 
     @Autowired
@@ -30,7 +32,7 @@ public class ProductController extends ExceptionHandler{
 
     //Adds a product
     @ApiOperation(value = "Adds a product")
-    @RequestMapping(path = "/api/product", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public void add(@RequestBody ProductForm productForm) throws ApiException {
         productForm.setBrand(productForm.getBrand().toLowerCase().trim());
         productForm.setCategory(productForm.getCategory().toLowerCase().trim());
@@ -39,7 +41,7 @@ public class ProductController extends ExceptionHandler{
     }
 
     @ApiOperation(value = "Adds products")
-    @RequestMapping(path = "/api/product/list", method = RequestMethod.POST)
+    @RequestMapping(path = "/list", method = RequestMethod.POST)
     public void add(@RequestBody List<ProductForm> productFormList) throws ApiException {
         List<ProductPojo> productPojoList=new ArrayList<>();
         for(ProductForm productForm:productFormList) {
@@ -53,7 +55,7 @@ public class ProductController extends ExceptionHandler{
 
     //Retrieves a product by productId
     @ApiOperation(value = "Get a product by Id")
-    @RequestMapping(path = "/api/product/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public ProductData get(@PathVariable int id) throws ApiException {
         ProductPojo productPojo = productService.get(id);
         BrandPojo brandPojo= brandService.get(productPojo.getBrandCategory());
@@ -62,7 +64,7 @@ public class ProductController extends ExceptionHandler{
 
     //Retrieves list of all products
     @ApiOperation(value = "Get list of all products")
-    @RequestMapping(path = "/api/product", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public List<ProductData> getAll() throws ApiException {
         List<ProductPojo> productPojoList = productService.getAll();
         List<ProductData> productDataList = new ArrayList<>();
@@ -75,7 +77,7 @@ public class ProductController extends ExceptionHandler{
 
     //Updates a product
     @ApiOperation(value = "Updates a product")
-    @RequestMapping(path = "/api/product/{id}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
     public void update(@PathVariable int id, @RequestBody ProductForm productForm) throws ApiException {
         ProductPojo productPojo= productService.get(id);
         productForm.setBrand(brandService.get(productPojo.getBrandCategory()).getBrand());
@@ -84,10 +86,4 @@ public class ProductController extends ExceptionHandler{
         productService.update(id, DataConversionUtil.convert(productForm,brandPojo));
     }
     
-    //Deletes a Product record
-    @ApiOperation(value = "Deletes a ProductDetails record")
-	@RequestMapping(path = "/api/product/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable int id) throws ApiException {
-    	productService.delete(id);
-	}
 }

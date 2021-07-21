@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import pos.model.BrandForm;
 import pos.model.data.BrandData;
+import pos.model.form.BrandForm;
 import pos.pojo.BrandPojo;
 import pos.service.ApiException;
 import pos.service.BrandService;
@@ -18,7 +18,7 @@ import java.util.List;
 //Controls the brand page of the application
 @Api
 @RestController
-//@RequestMapping(path="/api/brand")
+@RequestMapping(path="/api/brand")
 public class BrandController extends ExceptionHandler{
 
     @Autowired
@@ -26,7 +26,7 @@ public class BrandController extends ExceptionHandler{
 
     //Add a brand
     @ApiOperation(value = "Adding a brand")
-    @RequestMapping(path = "/api/brand", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public void add(@RequestBody BrandForm brandForm) throws ApiException {
         BrandPojo brandPojo= DataConversionUtil.convert(brandForm);
         brandService.add(brandPojo);
@@ -34,7 +34,7 @@ public class BrandController extends ExceptionHandler{
     
     //Add brands using TSV
     @ApiOperation(value = "Adds a brand Through TSV")
-    @RequestMapping(path = "/api/brand/list", method = RequestMethod.POST)
+    @RequestMapping(path = "/list", method = RequestMethod.POST)
     public void add(@RequestBody List<BrandForm> brandForm) throws ApiException {
         List<BrandPojo> brandPojoList=new ArrayList<>();
         for(BrandForm brandForm1:brandForm) {
@@ -46,7 +46,7 @@ public class BrandController extends ExceptionHandler{
 
     //Retrieve a brand using id
     @ApiOperation(value = "Get a brand by Id")
-    @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public BrandData get(@PathVariable int id) throws ApiException {
         BrandPojo brandPojo = brandService.get(id);
         return DataConversionUtil.convert(brandPojo);
@@ -54,22 +54,15 @@ public class BrandController extends ExceptionHandler{
 
     //Retrieve complete list of all brands
     @ApiOperation(value = "Get list of all brands")
-    @RequestMapping(path = "/api/brand", method = RequestMethod.GET)
-    public List<BrandData> getAll(){
+    @RequestMapping(path = "", method = RequestMethod.GET)
+    public List<BrandData> getAll() throws ApiException{
         List<BrandPojo> brandPojoList = brandService.getAll();
         return DataConversionUtil.convert(brandPojoList);
     }
-    
-    //Delete a brand record
-    @ApiOperation(value = "Deletes an brand")
-	@RequestMapping(path = "/api/brand/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable int id) throws  ApiException{
-    	brandService.delete(id);
-	}
 
     //Updates a brand
     @ApiOperation(value = "Updates a brand")
-    @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
     public void update(@PathVariable int id, @RequestBody BrandForm brandForm) throws ApiException {
         BrandPojo brandPojo = DataConversionUtil.convert(brandForm);
         brandService.update(id, brandPojo);

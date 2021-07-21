@@ -202,20 +202,6 @@ function uploadRows(){
 	return false;
 }
 
-function deleteProduct(id){
-    console.log("delete id", id);
-	var url = getProductUrl() + "/" + id;
-
-	$.ajax({
-	   url: url,
-	   type: 'DELETE',
-	   success: function(data) {
-	   		getProductList();
-	   },
-	   error: handleAjaxError
-	});
-}
-
 function downloadErrors(){
 	writeFileData(errorData);
 }
@@ -226,7 +212,6 @@ function displayProductList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var deleteButton = '<button onclick="deleteProduct(' + e.id + ')" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete</button>';
 		var buttonHtml = ' <button class="btn btn-primary" onclick="displayEditProduct(' + e.id + ')">Edit</button>';
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
@@ -235,7 +220,6 @@ function displayProductList(data){
 		+ '<td>'  + e.name + '</td>'
 		+ '<td>'  + e.mrp + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
-		+ '<td>' + deleteButton + '</td>'
 		+ '</tr>';
         $tbody.append(row);
 	}

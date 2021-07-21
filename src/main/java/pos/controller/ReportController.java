@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pos.model.ReportFilter;
+
+import pos.model.form.ReportFilter;
 import pos.service.ReportService;
 
 import javax.servlet.http.HttpServletResponse;

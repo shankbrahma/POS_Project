@@ -1,9 +1,7 @@
 package pos.pojo;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
 
 @Entity
 public class OrderPojo {

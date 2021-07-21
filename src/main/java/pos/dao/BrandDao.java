@@ -1,14 +1,14 @@
 package pos.dao;
 
 import org.springframework.stereotype.Repository;
-import pos.pojo.BrandPojo;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jdk.internal.org.jline.utils.Log;
+import pos.pojo.BrandPojo;
+import pos.service.ApiException;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 //Repository for brand
@@ -32,29 +32,30 @@ public class BrandDao extends AbstractDao{
 
     //Retrieve all brand pojo
     @Transactional
-    public List<BrandPojo> selectAll() {
+    public List<BrandPojo> selectAll() throws ApiException {
         String selectAll = "select p from BrandPojo p";
+        try
+        {
         TypedQuery<BrandPojo> query = getQuery(selectAll,  BrandPojo.class);
-        //TODO
-        if(query == null){
-            return new ArrayList<>();
-        }
         return query.getResultList();
+        }
+        catch(NoResultException e){
+        	Log.debug("No data found");
+        	throw new ApiException(e.getMessage());
+        }
+
+        
     }
 
     //Update a brand with given brandId
     @Transactional
     public void update(int id,BrandPojo brandPojo) {
-        BrandPojo brandPojo1= em().find(BrandPojo.class, id);
-        brandPojo1.setBrand(brandPojo.getBrand());
-        brandPojo1.setCategory(brandPojo.getCategory());
-        em().merge(brandPojo1);
+
     }
 
     @Transactional
     //Retrieve brand pojo based in brand and category
-    //TODO rename
-    public List<BrandPojo> getIdFromBrandCategory(String brand, String category){
+    public List<BrandPojo> selectByBrandAndCategory(String brand, String category){
         String selectBrandCategory = "select p from BrandPojo p where brand=:brand and category=:category";
         TypedQuery<BrandPojo> query = getQuery(selectBrandCategory, BrandPojo.class);
         query.setParameter("brand",brand);
@@ -62,10 +63,4 @@ public class BrandDao extends AbstractDao{
         return query.getResultList();
     }
     
-    @Transactional
-    public int delete(int id) {
-		Query query = em().createQuery(deleteById);
-		query.setParameter("id", id);
-		return query.executeUpdate();
-	}
 }

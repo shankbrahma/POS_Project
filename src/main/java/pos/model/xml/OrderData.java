@@ -1,8 +1,6 @@
-package pos.model;
+package pos.model.xml;
 
-import lombok.Data;
 
-@Data
 public class OrderData {
     private Integer id;
     private String datetime;

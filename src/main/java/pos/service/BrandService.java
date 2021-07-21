@@ -49,7 +49,7 @@ public class BrandService {
 
     //get list of all brands
     @Transactional
-    public List<BrandPojo> getAll() {
+    public List<BrandPojo> getAll() throws ApiException{
         return brandDao.selectAll();
     }
 
@@ -84,7 +84,7 @@ public class BrandService {
         if(StringUtil.isEmpty(brandPojo.getCategory())) {
             throw new ApiException("Category name cannot be empty");
         }
-        List<BrandPojo> brandPojoList = brandDao.getIdFromBrandCategory(brandPojo.getBrand(),brandPojo.getCategory());
+        List<BrandPojo> brandPojoList = brandDao.selectByBrandAndCategory(brandPojo.getBrand(),brandPojo.getCategory());
         if(!brandPojoList.isEmpty()) {
             throw new ApiException("Brand and Category already exist: "+brandPojo.getBrand()+" "+brandPojo.getCategory());
         }
@@ -94,7 +94,7 @@ public class BrandService {
     @Transactional()
     public BrandPojo getBrandPojo(String brand, String category) throws ApiException {
 
-        List<BrandPojo> brandPojoList = brandDao.getIdFromBrandCategory(brand, category);
+        List<BrandPojo> brandPojoList = brandDao.selectByBrandAndCategory(brand, category);
         if (brandPojoList.isEmpty()) {
             throw new ApiException("The brand name and category given does not exist " + brand + " " + category);
         }
@@ -106,21 +106,5 @@ public class BrandService {
         brandPojo.setBrand(StringUtil.toLowerCase(brandPojo.getBrand()));
         brandPojo.setCategory(StringUtil.toLowerCase(brandPojo.getCategory()));
     }
-
-    @Transactional
-	public void delete(int id) throws ApiException {
-		// TODO Auto-generated method stub
-		System.out.println(id);
-		List<ProductPojo> l=ps.getAll();
-		for(int i=0;i<l.size();i++)
-		{
-			if(l.get(i).getBrandCategory()==id)
-			{
-				int Pid=l.get(i).getId();
-				ps.delete(Pid);
-				brandDao.delete(id);
-			}
-		}
-	}
-
+    
 }

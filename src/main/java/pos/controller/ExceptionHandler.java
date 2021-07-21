@@ -3,7 +3,8 @@ package pos.controller;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import pos.model.ApiError;
+
+import pos.model.form.ApiError;
 import pos.service.ApiException;
 
 import javax.servlet.http.HttpServletRequest;

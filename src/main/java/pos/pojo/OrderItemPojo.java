@@ -1,6 +1,5 @@
 package pos.pojo;
 
-
 import javax.persistence.*;
 @Entity
 public class OrderItemPojo {
@@ -12,10 +11,10 @@ public class OrderItemPojo {
     private Integer id;
     private Integer quantity;
     //TODO
-    private Double sp;
+    private Double sellingPrice;
     private Integer orderId;
     //TODO
-    private Integer ProductId;
+    private Integer productId;
 
     public Integer getId() {
 		return id;
@@ -34,11 +33,11 @@ public class OrderItemPojo {
 	}
 
 	public Double getSp() {
-		return sp;
+		return sellingPrice;
 	}
 
 	public void setSp(Double sp) {
-		this.sp = sp;
+		this.sellingPrice = sp;
 	}
 
 	public Integer getOrderId() {
@@ -50,15 +49,15 @@ public class OrderItemPojo {
 	}
 
 	public Integer getProductId() {
-		return ProductId;
+		return productId;
 	}
 
-	public void setProductId(Integer productId) {
-		ProductId = productId;
+	public void setProductId(Integer pId) {
+		productId = pId;
 	}
 
 	public double getRevenue() {
-        return quantity*sp;
+        return quantity*sellingPrice;
     }
 
 }

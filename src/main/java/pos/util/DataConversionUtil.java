@@ -1,7 +1,17 @@
 package pos.util;
 
-import pos.model.*;
 import pos.model.data.BrandData;
+import pos.model.data.InventoryData;
+import pos.model.data.InventoryReportData;
+import pos.model.data.OrderInvoiceData;
+import pos.model.data.OrderItemData;
+import pos.model.data.ProductData;
+import pos.model.data.SaleReportData;
+import pos.model.form.BrandForm;
+import pos.model.form.InventoryForm;
+import pos.model.form.OrderItemForm;
+import pos.model.form.ProductForm;
+import pos.model.xml.*;
 import pos.pojo.*;
 import pos.service.ApiException;
 

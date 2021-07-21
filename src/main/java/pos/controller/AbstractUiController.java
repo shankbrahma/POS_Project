@@ -4,7 +4,8 @@ package pos.controller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import pos.model.InfoData;
+
+import pos.model.data.InfoData;
 
 @RestController
 public abstract class AbstractUiController {

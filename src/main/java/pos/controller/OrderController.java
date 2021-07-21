@@ -4,9 +4,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pos.model.OrderData;
-import pos.model.OrderItemData;
-import pos.model.OrderItemForm;
+
+import pos.model.data.OrderItemData;
+import pos.model.form.OrderItemForm;
+import pos.model.xml.OrderData;
 import pos.pojo.OrderItemPojo;
 import pos.pojo.OrderPojo;
 import pos.pojo.ProductPojo;

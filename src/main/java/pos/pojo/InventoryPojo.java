@@ -1,10 +1,6 @@
 package pos.pojo;
 
-
-
-
 import javax.persistence.*;
-
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"productId"})})

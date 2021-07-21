@@ -2,8 +2,11 @@ package pos.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pos.model.*;
+
 import pos.model.data.BrandData;
+import pos.model.data.OrderInvoiceData;
+import pos.model.form.ReportFilter;
+import pos.model.xml.*;
 import pos.pojo.*;
 import pos.util.DataConversionUtil;
 import pos.util.PdfConversionUtil;
@@ -57,7 +60,7 @@ public class ReportService {
     }
 
     //generates list of brands for brand report
-    public BrandXmlList generateBrandList() {
+    public BrandXmlList generateBrandList() throws ApiException{
         List<BrandPojo> brandPojoList = brandService.getAll();
         List<BrandData> brandDataList = DataConversionUtil.convert(brandPojoList);
         BrandXmlList brandXmlList = new BrandXmlList();

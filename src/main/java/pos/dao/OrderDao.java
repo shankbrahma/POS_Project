@@ -19,12 +19,8 @@ public class OrderDao extends AbstractDao{
     }
 
     @Transactional
-    //TODO
     public void update(int id,OrderPojo orderPojo){
-        OrderPojo orderPojo1=em().find(OrderPojo.class,id);
-        orderPojo1.setIsInvoiceGenerated(orderPojo.getIsInvoiceGenerated());
-        orderPojo1.setDatetime(orderPojo.getDatetime());
-        em().merge(orderPojo1);
+
     }
 
     //Retrieve an Order by id

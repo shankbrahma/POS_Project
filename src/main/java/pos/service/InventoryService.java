@@ -27,7 +27,7 @@ public class InventoryService {
     @Transactional(rollbackOn = ApiException.class)
     public void add(InventoryPojo inventoryPojo) throws ApiException{
         check(inventoryPojo);
-        InventoryPojo inventoryPojo1=inventoryDao.getFromProductId(inventoryPojo.getProductId());
+        InventoryPojo inventoryPojo1=inventoryDao.selectByProductId(inventoryPojo.getProductId());
         if(inventoryPojo1!=null)
         {
             inventoryPojo.setQuantity(inventoryPojo.getQuantity()+inventoryPojo1.getQuantity());
@@ -54,7 +54,7 @@ public class InventoryService {
 
     //retrieves all product inventories
     @Transactional
-    public List<InventoryPojo> getAll() {
+    public List<InventoryPojo> getAll() throws ApiException {
         return inventoryDao.selectAll();
     }
 
@@ -88,7 +88,7 @@ public class InventoryService {
     //retrieves inventory from product id
     @Transactional
     public InventoryPojo getFromProductId(int productId) throws ApiException {
-        InventoryPojo inventoryPojo = inventoryDao.getFromProductId(productId);
+        InventoryPojo inventoryPojo = inventoryDao.selectByProductId(productId);
         if(inventoryPojo == null){
             throw new ApiException("Inventory with given productId does not exist, productId: " + productId);
         }
@@ -103,9 +103,4 @@ public class InventoryService {
         return brandDao.select(productPojo.getBrandCategory());
     }
     
-    @Transactional
-	public void delete(int id) throws ApiException{
-		// TODO Auto-generated method stub
-		inventoryDao.delete(id);
-	}
 }

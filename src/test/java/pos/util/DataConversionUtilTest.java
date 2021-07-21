@@ -2,8 +2,16 @@ package pos.util;
 
 import org.junit.Before;
 import org.junit.Test;
-import pos.model.*;
+
 import pos.model.data.BrandData;
+import pos.model.data.InventoryData;
+import pos.model.data.OrderItemData;
+import pos.model.data.ProductData;
+import pos.model.form.BrandForm;
+import pos.model.form.InventoryForm;
+import pos.model.form.OrderItemForm;
+import pos.model.form.ProductForm;
+import pos.model.xml.*;
 import pos.pojo.*;
 import pos.service.AbstractUnitTest;
 import pos.service.ApiException;
@@ -132,7 +140,7 @@ public class DataConversionUtilTest extends AbstractUnitTest{
 
     // Testing conversion of list of brand pojo to data
     @Test
-    public void testListBrandPojoToData() {
+    public void testListBrandPojoToData() throws ApiException {
         List<BrandPojo> brandPojoList = brandService.getAll();
         List<BrandData> brandDataList = DataConversionUtil.convert(brandPojoList);
         assertEquals(brandPojoList.size(), brandDataList.size());
