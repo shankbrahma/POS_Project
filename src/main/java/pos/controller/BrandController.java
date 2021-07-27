@@ -13,6 +13,7 @@ import pos.service.BrandService;
 import pos.util.DataConversionUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 //Controls the brand page of the application
@@ -36,12 +37,14 @@ public class BrandController extends ExceptionHandler{
     @ApiOperation(value = "Adds a brand Through TSV")
     @RequestMapping(path = "/list", method = RequestMethod.POST)
     public void add(@RequestBody List<BrandForm> brandForm) throws ApiException {
+
         List<BrandPojo> brandPojoList=new ArrayList<>();
         for(BrandForm brandForm1:brandForm) {
             BrandPojo brandPojo = DataConversionUtil.convert(brandForm1);
             brandPojoList.add(brandPojo);
         }
         brandService.addList(brandPojoList);
+    	
     }
 
     //Retrieve a brand using id
@@ -67,4 +70,5 @@ public class BrandController extends ExceptionHandler{
         BrandPojo brandPojo = DataConversionUtil.convert(brandForm);
         brandService.update(id, brandPojo);
     }
+   
 }

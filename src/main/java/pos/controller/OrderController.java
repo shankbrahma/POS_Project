@@ -1,24 +1,31 @@
 package pos.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import pos.model.data.OrderItemData;
 import pos.model.form.OrderItemForm;
 import pos.model.xml.OrderData;
+import pos.pojo.InventoryPojo;
 import pos.pojo.OrderItemPojo;
 import pos.pojo.OrderPojo;
 import pos.pojo.ProductPojo;
 import pos.service.ApiException;
+import pos.service.InventoryService;
 import pos.service.OrderService;
 import pos.service.ProductService;
 import pos.util.DataConversionUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 //Controls the order page of the application
 @Api
@@ -31,16 +38,56 @@ public class OrderController extends ExceptionHandler{
     @Autowired
     private ProductService productService;
     
+    @Autowired
+    private InventoryService inventoryService;
     //Adds an order
     @ApiOperation(value = "Adds Order Items")
     @RequestMapping(path = "/api/order", method = RequestMethod.POST)
     public void add(@RequestBody OrderItemForm[] orderItemForms) throws ApiException{
         Map<String, ProductPojo> allProductPojoByBarcode = productService.getAllProductPojosByBarcode();
+        
         List<OrderItemPojo> orderItemList = DataConversionUtil.convertOrderItemForms(allProductPojoByBarcode, orderItemForms);
+        checkQuantityExists(orderItemList);
         orderService.add(orderItemList);
     }
 
-    //Adds an OrderItem to an existing order
+    private void checkQuantityExists(List<OrderItemPojo> orderItemList) throws ApiException {
+		// TODO Auto-generated method stub
+		List<OrderItemPojo> orderforms=new ArrayList<>();
+		List<InventoryPojo> inventoryPojo=inventoryService.getAll();
+		List<ProductPojo> productPojo=productService.getAll();
+		HashMap<String , Integer> hMapNumbers = new HashMap<String , Integer>();
+		int pid=0;
+		String barcode=null;
+		for(int i=0;i<orderItemList.size();i++)
+		{
+			for(int j=0;j<inventoryPojo.size();j++)
+			{
+				if(orderItemList.get(i).getProductId().equals(inventoryPojo.get(j).getProductId()))
+					{
+						if(orderItemList.get(i).getQuantity()>inventoryPojo.get(j).getQuantity())
+						{
+							pid=orderItemList.get(i).getProductId();
+							for(ProductPojo productPojo1:productPojo)
+							{
+								if(productPojo1.getId()==pid)
+								{
+								barcode=productPojo1.getBarcode();
+								}
+							}
+							hMapNumbers.put(barcode, orderItemList.get(i).getQuantity());
+							orderforms.add(orderItemList.get(i));
+						}
+					}
+			}
+		}
+		if(!hMapNumbers.isEmpty())
+		{
+			throw new ApiException("The inventory is less for the following products: "+hMapNumbers);
+		}
+	}
+
+	//Adds an OrderItem to an existing order
     @ApiOperation(value = "Adds an OrderItem to an existing order")
     @RequestMapping(path = "/api/order_item/{orderId}", method = RequestMethod.POST)
     public void addOrderItem(@PathVariable int orderId, @RequestBody OrderItemForm orderItemForm) throws ApiException {

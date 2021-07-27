@@ -3,41 +3,46 @@
     <brand_item>
         <brand>amul</brand>
         <category>butter</category>
-        <id>7</id>
-    </brand_item>
-    <brand_item>
-        <brand>amul</brand>
-        <category>dairy</category>
-        <id>8</id>
-    </brand_item>
-    <brand_item>
-        <brand>amul</brand>
-        <category>milk</category>
-        <id>3</id>
-    </brand_item>
-    <brand_item>
-        <brand>brand1</brand>
-        <category>c1</category>
-        <id>1</id>
-    </brand_item>
-    <brand_item>
-        <brand>brand2</brand>
-        <category>c2</category>
         <id>2</id>
     </brand_item>
     <brand_item>
-        <brand>dabur</brand>
-        <category>health</category>
-        <id>9</id>
+        <brand>amul</brand>
+        <category>milk</category>
+        <id>1</id>
     </brand_item>
     <brand_item>
-        <brand>dairy</brand>
-        <category>milk</category>
+        <brand>britania</brand>
+        <category>biscuit</category>
         <id>6</id>
     </brand_item>
     <brand_item>
+        <brand>dairymilk</brand>
+        <category>chocolate</category>
+        <id>7</id>
+    </brand_item>
+    <brand_item>
         <brand>nestle</brand>
-        <category>choco</category>
+        <category>chocolate</category>
+        <id>8</id>
+    </brand_item>
+    <brand_item>
+        <brand>nestle</brand>
+        <category>coffee</category>
+        <id>3</id>
+    </brand_item>
+    <brand_item>
+        <brand>puma</brand>
+        <category>shirts</category>
         <id>4</id>
+    </brand_item>
+    <brand_item>
+        <brand>tata</brand>
+        <category>coffee</category>
+        <id>9</id>
+    </brand_item>
+    <brand_item>
+        <brand>tata</brand>
+        <category>tea</category>
+        <id>5</id>
     </brand_item>
 </brands>

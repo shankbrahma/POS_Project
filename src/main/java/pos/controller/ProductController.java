@@ -44,6 +44,7 @@ public class ProductController extends ExceptionHandler{
     @RequestMapping(path = "/list", method = RequestMethod.POST)
     public void add(@RequestBody List<ProductForm> productFormList) throws ApiException {
         List<ProductPojo> productPojoList=new ArrayList<>();
+        brandService.checkExixtsOrNot(productFormList);
         for(ProductForm productForm:productFormList) {
             productForm.setBrand(productForm.getBrand().toLowerCase().trim());
             productForm.setCategory(productForm.getCategory().toLowerCase().trim());

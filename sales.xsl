@@ -17,12 +17,12 @@
 			<fo:page-sequence master-reference="simpleA4">
 				<fo:flow flow-name="xsl-region-body">
 					<fo:block font-size="16pt" font-family="Helvetica"
-						color="black" font-weight="bold" space-after="5mm">
+						color="black" font-weight="bold" space-after="5mm" space-before="20pt">
 						Sales Report
 					</fo:block>
-					<fo:block font-size="10pt">
+					<fo:block font-size="12pt" space-before="35pt">
 						<fo:table table-layout="fixed" width="100%"
-							border-collapse="separate">
+							border-collapse="separate" line-height="25px">
 							<fo:table-column column-width="5cm" />
 							<fo:table-column column-width="5cm" />
 							<fo:table-column column-width="5cm" />
@@ -39,10 +39,6 @@
 								<fo:table-cell
 									xsl:use-attribute-sets="tableBorder">
 									<fo:block font-weight="bold">Quantity</fo:block>
-								</fo:table-cell>
-								<fo:table-cell
-									xsl:use-attribute-sets="tableBorder">
-									<fo:block font-weight="bold">Revenue</fo:block>
 								</fo:table-cell>
 							</fo:table-header>
 							<fo:table-body>
@@ -70,11 +66,6 @@
 			<fo:table-cell xsl:use-attribute-sets="tableBorder">
 				<fo:block>
 					<xsl:value-of select="quantity" />
-				</fo:block>
-			</fo:table-cell>
-			<fo:table-cell xsl:use-attribute-sets="tableBorder">
-				<fo:block>
-					<xsl:value-of select="revenue" />
 				</fo:block>
 			</fo:table-cell>
 		</fo:table-row>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InventoryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pos</a> &gt; <a href="index.source.html" class="el_package">pos.service</a> &gt; <span class="el_source">InventoryService.java</span></div><h1>InventoryService.java</h1><pre class="source lang-java linenums">package pos.service;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import pos.dao.BrandDao;
+import pos.dao.InventoryDao;
+import pos.dao.ProductDao;
+import pos.pojo.BrandPojo;
+import pos.pojo.InventoryPojo;
+import pos.pojo.ProductPojo;
+
+import javax.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+@Service
+<span class="fc" id="L20">public class InventoryService {</span>
+
+    @Autowired
+    private InventoryDao inventoryDao;
+    @Autowired
+    private ProductDao productDao;
+    @Autowired
+    private BrandDao brandDao;
+
+    @Autowired
+    private ProductService productService;
+    
+    //Adds a product inventory
+    @Transactional(rollbackOn = ApiException.class)
+    public void add(InventoryPojo inventoryPojo) throws ApiException{
+<span class="fc" id="L35">        check(inventoryPojo);</span>
+<span class="fc" id="L36">        InventoryPojo inventoryPojo1=inventoryDao.selectByProductId(inventoryPojo.getProductId());</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if(inventoryPojo1!=null)</span>
+        {
+<span class="nc" id="L39">            inventoryPojo.setQuantity(inventoryPojo.getQuantity()+inventoryPojo1.getQuantity());</span>
+<span class="nc" id="L40">            update(inventoryPojo1.getId(),inventoryPojo );</span>
+        }
+        else
+<span class="fc" id="L43">        inventoryDao.insert(inventoryPojo);</span>
+<span class="fc" id="L44">    }</span>
+
+    @Transactional(rollbackOn = ApiException.class)
+    public void addList(List&lt;InventoryPojo&gt; inventoryPojoList) throws ApiException {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for (InventoryPojo inventoryPojo:inventoryPojoList){</span>
+<span class="nc" id="L49">            check(inventoryPojo);</span>
+<span class="nc" id="L50">        }</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        for (InventoryPojo inventoryPojo:inventoryPojoList){</span>
+<span class="nc" id="L52">            add(inventoryPojo);</span>
+<span class="nc" id="L53">        }</span>
+<span class="nc" id="L54">    }</span>
+    
+    //retrieves a product inventory by id
+    @Transactional(rollbackOn = ApiException.class)
+    public InventoryPojo get(int id) throws ApiException {
+<span class="fc" id="L59">        return getCheck(id);</span>
+    }
+
+    //retrieves all product inventories
+    @Transactional
+    public List&lt;InventoryPojo&gt; getAll() throws ApiException {
+<span class="fc" id="L65">        return inventoryDao.selectAll();</span>
+    }
+
+    //updates existing inventory
+    @Transactional(rollbackOn  = ApiException.class)
+    public void update(int id, InventoryPojo inventoryPojo) throws ApiException {
+<span class="fc" id="L71">        check(inventoryPojo);</span>
+<span class="fc" id="L72">        InventoryPojo inventoryPojo1 = getCheck(id);</span>
+<span class="fc" id="L73">        inventoryPojo1.setQuantity(inventoryPojo.getQuantity());</span>
+<span class="fc" id="L74">        inventoryDao.update(id, inventoryPojo1);</span>
+<span class="fc" id="L75">    }</span>
+
+    //checks whether inventory exists or not
+    @Transactional
+    public InventoryPojo getCheck(int id) throws ApiException {
+<span class="fc" id="L80">        InventoryPojo inventoryPojo = inventoryDao.select(id);</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (inventoryPojo == null) {</span>
+<span class="fc" id="L82">            throw new ApiException(&quot;Inventory with given ID does not exist, id: &quot; + id);</span>
+        }
+<span class="fc" id="L84">        return inventoryPojo;</span>
+    }
+
+    //checks whether quantity is positive or not
+    @Transactional
+    public void check(InventoryPojo inventoryPojo) throws ApiException {
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if(inventoryPojo.getQuantity()&lt;0){</span>
+<span class="fc" id="L91">            throw new ApiException(&quot;Quantity cannot be negative&quot;);</span>
+        }
+<span class="fc" id="L93">    }</span>
+
+    //retrieves inventory from product id
+    @Transactional
+    public InventoryPojo getFromProductId(int productId) throws ApiException {
+<span class="fc" id="L98">        InventoryPojo inventoryPojo = inventoryDao.selectByProductId(productId);</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if(inventoryPojo == null){</span>
+<span class="nc" id="L100">            throw new ApiException(&quot;Inventory with given productId does not exist, productId: &quot; + productId);</span>
+        }
+<span class="fc" id="L102">        return inventoryPojo;</span>
+    }
+
+    //retrieves brand pojo from inventory pojo
+    @Transactional
+    public BrandPojo getBrandFromInventory(InventoryPojo inventoryPojo) throws ApiException {
+<span class="nc" id="L108">        getCheck(inventoryPojo.getId());</span>
+<span class="nc" id="L109">        ProductPojo productPojo= productDao.select(inventoryPojo.getProductId());</span>
+<span class="nc" id="L110">        return brandDao.select(productPojo.getBrandCategory());</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -33,6 +33,15 @@ public class InventoryServiceTest extends AbstractUnitTest{
 
     }
 
+    //Testing updation
+    @Test()
+    public void testUpdate() throws ApiException
+    {
+    	InventoryPojo inventoryPojo1=inventoryPojoList.get(1);
+  		InventoryPojo inventoryPojo=getInventoryPojo(productPojoList.get(1));
+  		inventoryService.update(inventoryPojo1.getId(), inventoryPojo);
+  		assertEquals(inventoryPojo1.getQuantity(),inventoryPojo.getQuantity());
+    }
 
     //testing whether inventory with id exists or not
     @Test()

@@ -22,13 +22,13 @@
 						<xsl:value-of select="order_id" />
 					</fo:block>
 					<fo:block font-size="16pt" font-family="Helvetica"
-						color="black" font-weight="bold" space-after="5mm">
+						color="black" font-weight="bold" space-after="5mm" space-before="20pt">
 						Date and Time:
 						<xsl:value-of select="datetime" />
-					</fo:block>
-					<fo:block font-size="10pt">
+					</fo:block >
+					<fo:block font-size="12pt" space-before="30pt">
 						<fo:table table-layout="fixed" width="100%"
-							border-collapse="separate">
+							border-collapse="separate" line-height="25px">
 							<fo:table-column column-width="5cm" />
 							<fo:table-column column-width="5cm" />
 							<fo:table-column column-width="5cm" />
@@ -53,7 +53,7 @@
 						</fo:table>
 					</fo:block>
 					<fo:block font-size="16pt" font-family="Helvetica"
-						color="black" font-weight="bold" space-after="5mm">
+						color="black" font-weight="bold" space-after="5mm" space-before="15pt">
 						Total: Rs.
 						<xsl:value-of select="total" />
 					</fo:block>

@@ -11,6 +11,9 @@ import pos.pojo.InventoryPojo;
 import pos.pojo.ProductPojo;
 
 import javax.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -23,6 +26,9 @@ public class InventoryService {
     @Autowired
     private BrandDao brandDao;
 
+    @Autowired
+    private ProductService productService;
+    
     //Adds a product inventory
     @Transactional(rollbackOn = ApiException.class)
     public void add(InventoryPojo inventoryPojo) throws ApiException{
@@ -46,6 +52,7 @@ public class InventoryService {
             add(inventoryPojo);
         }
     }
+    
     //retrieves a product inventory by id
     @Transactional(rollbackOn = ApiException.class)
     public InventoryPojo get(int id) throws ApiException {

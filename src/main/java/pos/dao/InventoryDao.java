@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import jdk.internal.org.jline.utils.Log;
+//import jdk.internal.org.jline.utils.Log;
 import pos.pojo.InventoryPojo;
 import pos.service.ApiException;
 
@@ -37,7 +37,7 @@ public class InventoryDao extends AbstractDao{
         return query.getResultList();
         }
         catch(NoResultException e){
-        	Log.debug("No data found");
+//        	Log.debug("No data found");
         	throw new ApiException(e.getMessage());
         }
     }

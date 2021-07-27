@@ -90,6 +90,7 @@ public class ReportService {
         List<OrderItemPojo> orderItemPojoList1 = FilterByDate(reportFilter);
         Map<BrandPojo, Integer> quantityPerBrandCategory = getMapQuantity(reportFilter, orderItemPojoList1);
         Map<BrandPojo, Double> revenuePerBrandCategory = getMapRevenue(reportFilter, orderItemPojoList1);
+        System.out.println(revenuePerBrandCategory);
         return DataConversionUtil.convertSalesList(quantityPerBrandCategory, revenuePerBrandCategory);
     }
 
@@ -119,6 +120,7 @@ public class ReportService {
         for (OrderItemPojo orderItemPojo : orderItemPojoList) {
             if (Equals(orderService.getBrandFromOrderItem(orderItemPojo).getBrand(), reportFilter.getBrand())
                     && Equals(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(), reportFilter.getCategory())) {
+            	System.out.println(orderItemPojo.getRevenue());
                 revenuePerBrandCategory.merge(orderService.getBrandFromOrderItem(orderItemPojo), orderItemPojo.getRevenue(), Double::sum);
             }
         }

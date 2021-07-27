@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sales_items>
     <sales_item>
-        <brand>brand1</brand>
-        <category>c1</category>
-        <quantity>22</quantity>
-        <revenue>420.0</revenue>
+        <brand>amul</brand>
+        <category>milk</category>
+        <quantity>30</quantity>
+    </sales_item>
+    <sales_item>
+        <brand>amul</brand>
+        <category>butter</category>
+        <quantity>20</quantity>
+    </sales_item>
+    <sales_item>
+        <brand>nestle</brand>
+        <category>coffee</category>
+        <quantity>10</quantity>
     </sales_item>
 </sales_items>

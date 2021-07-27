@@ -1,12 +1,14 @@
 package pos.service;
 
-import org.junit.Test;
-import pos.pojo.BrandPojo;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import pos.pojo.BrandPojo;
 
 public class BrandServiceTest extends AbstractUnitTest{
 
+		
     //test the addition of a brand
     @Test
     public void testAdd() throws ApiException {
@@ -28,6 +30,16 @@ public class BrandServiceTest extends AbstractUnitTest{
         brandService.add(brandPojo);
     }
 
+//	@Test()
+//	public void testUpdate() throws Exception{
+////		BrandPojo brandpojo=getBrandPojo();
+//		BrandPojo brandPojo2=getBrandPojo();
+////		brandPojo2.setBrand("mango");
+////		brandPojo2.setCategory("fruits");
+//		brandService.update(brandPojoList.get(1).getId(), brandPojo2);
+//		assertEquals(brandPojoList.get(1).getBrand(),brandPojo2.getBrand());
+//	}
+//	
     //test the normalization function
     @Test
     public void testNormalize() {
@@ -36,4 +48,12 @@ public class BrandServiceTest extends AbstractUnitTest{
         BrandService.normalize(brandPojo);
         assertEquals("apple", brandPojo.getBrand());
     }
+    
+//    private BrandPojo getBrandPojo() {
+//        BrandPojo brandPojo = brandPojoList.get(1);
+//        brandPojo.setId(brandPojoList.get(1).getId());
+//        brandPojo.setBrand(" apple ");
+//        brandPojo.setCategory("fruits");
+//        return brandPojo;
+//    }
 }

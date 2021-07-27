@@ -1,15 +1,17 @@
 package pos.dao;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-import jdk.internal.org.jline.utils.Log;
-import pos.pojo.BrandPojo;
-import pos.service.ApiException;
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+//import jdk.internal.org.jline.utils.Log;
+import pos.pojo.BrandPojo;
+import pos.service.ApiException;
+
 
 //Repository for brand
 @Repository
@@ -40,7 +42,7 @@ public class BrandDao extends AbstractDao{
         return query.getResultList();
         }
         catch(NoResultException e){
-        	Log.debug("No data found");
+//        	Log.debug("No data found");
         	throw new ApiException(e.getMessage());
         }
 

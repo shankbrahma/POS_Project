@@ -11,10 +11,10 @@ public class OrderItemPojo {
     private Integer id;
     private Integer quantity;
     //TODO
-    private Double sellingPrice;
+    private Double sp;
     private Integer orderId;
     //TODO
-    private Integer productId;
+    private Integer ProductId;
 
     public Integer getId() {
 		return id;
@@ -33,11 +33,11 @@ public class OrderItemPojo {
 	}
 
 	public Double getSp() {
-		return sellingPrice;
+		return sp;
 	}
 
 	public void setSp(Double sp) {
-		this.sellingPrice = sp;
+		this.sp = sp;
 	}
 
 	public Integer getOrderId() {
@@ -49,15 +49,15 @@ public class OrderItemPojo {
 	}
 
 	public Integer getProductId() {
-		return productId;
+		return ProductId;
 	}
 
-	public void setProductId(Integer pId) {
-		productId = pId;
+	public void setProductId(Integer productId) {
+		ProductId = productId;
 	}
 
-	public double getRevenue() {
-        return quantity*sellingPrice;
+	public Double getRevenue() {
+        return quantity*sp;
     }
 
 }

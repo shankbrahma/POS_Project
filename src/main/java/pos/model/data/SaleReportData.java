@@ -4,6 +4,8 @@ package pos.model.data;
 public class SaleReportData {
     private String brand;
     private String category;
+    private Integer quantity;
+    private Double revenue;
     public String getBrand() {
 		return brand;
 	}
@@ -28,6 +30,5 @@ public class SaleReportData {
 	public void setRevenue(Double revenue) {
 		this.revenue = revenue;
 	}
-	private Integer quantity;
-    private Double revenue;
+	
 }

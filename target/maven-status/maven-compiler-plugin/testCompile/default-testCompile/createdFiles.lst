@@ -3,5 +3,6 @@ pos\service\BrandServiceTest.class
 pos\service\QaConfig.class
 pos\service\OrderServiceTest.class
 pos\service\AbstractUnitTest.class
+pos\util\DataConversionUtilTest.class
 pos\service\AboutAppServiceTest.class
 pos\service\InventoryServiceTest.class

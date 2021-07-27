@@ -3,8 +3,36 @@
 body {
   font-family: 'Droid Sans', serif;
   background-color: #f5f5f5;
+  margin-bottom: 7rem;
 }
 
+.toast{ font-size:1.5rem; }
+.row {
+  margin-right: 0px;
+}
+.container{
+  width:1130px;
+}
+.table td, .table th {
+  padding:0rem;
+}
+
+tbody{
+  border-bottom: 2px solid rgb(172, 170, 170);
+}
+/* table { border-collapse: collapse; }
+thead {
+    border-right: solid 3px black; 
+    border-left: solid 3px black;
+    border-top: 3px solid black;
+   border-bottom: 3px solid black;}
+tr {
+   
+  border-bottom:1.5px solid black; }
+td {
+  border-right: solid 1.5px black; 
+  border-left: solid 1.5px black;
+} */
 .main-color-bg {
   background-color: #3a4953 !important;
   color: #fff !important;
@@ -47,10 +75,6 @@ p {
 
 a:link {
   color: #9ca3a8;
-}
-
-a:hover, a:focus {
-  color: #fff;
 }
 
 .navbar {
@@ -109,8 +133,11 @@ a:hover, a:focus {
   border-color: #28333a;
 }
 
-.icon-bar a:hover {
-  background-color: #f5f5f5;
+.container-wrapper{
+  border: 1px solid rgba(0, 0, 0, .11);
+    ;
+    padding: 10px;
+    width: 100%;
 }
 
 .active {

@@ -1,5 +1,6 @@
 package pos.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pos.dao.ProductDao;
+import pos.model.form.InventoryForm;
+import pos.pojo.BrandPojo;
 import pos.pojo.InventoryPojo;
 import pos.pojo.ProductPojo;
 import pos.util.StringUtil;
@@ -40,11 +43,34 @@ public class ProductService {
     public void addList(List<ProductPojo> productPojoList) throws ApiException {
         for (ProductPojo productPojo:productPojoList){
             normalize(productPojo);
+            checkDuplicates(productPojoList);
             check(productPojo);
         }
         for (ProductPojo productPojo:productPojoList){
             add(productPojo);
         }
+    }
+    public List<ProductPojo> checkDuplicates(List<ProductPojo> productPojoList) throws ApiException
+    {
+    	List<ProductPojo> productPojoList1=new ArrayList<>();
+    	HashMap<String , String> hMapNumbers = new HashMap<String , String>();
+    	for(int i=0;i<productPojoList.size();i++)
+    	{
+    		for(int j=i+1;j<productPojoList.size();j++)
+    		{
+    			if((productPojoList.get(i).getBarcode().equals(productPojoList.get(j).getBarcode())))
+    			{
+    				hMapNumbers.put(productPojoList.get(i).getBarcode(), null);
+    				productPojoList1.add(productPojoList.get(i));
+    			}
+    		}
+    	}
+    	
+    		if(!productPojoList1.isEmpty())
+        	{
+        		throw new ApiException("Repeated Barcodes exists in File uploaded"+hMapNumbers);
+        	}
+        	return productPojoList1;
     }
     //gets a product by id
     @Transactional(rollbackOn = ApiException.class)
@@ -104,6 +130,23 @@ public class ProductService {
         return productPojo;
     }
 
+    //checks list if all barcodes are present
+    public void checkBarcodeExixtsOrNor(List<InventoryForm> inventoryFormList) throws ApiException{
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> hMapInventory=new HashMap<String,Integer>();
+		for(InventoryForm inventoryForm:inventoryFormList)
+		{
+			ProductPojo productPojo= productDao.selectIdFromBarcode(inventoryForm.getBarcode());
+			if(productPojo==null){
+				hMapInventory.put(inventoryForm.getBarcode(), inventoryForm.getQuantity());
+			}
+		}
+		if(!hMapInventory.isEmpty())
+		{
+			throw new ApiException("The following Barcode's does not exist: "+hMapInventory);
+		}
+	}
+    
     //checks whether product with given id exists
     @Transactional
     public ProductPojo getCheck(int id) throws ApiException {
@@ -131,5 +174,9 @@ public class ProductService {
         productPojo.setName(StringUtil.toLowerCase(productPojo.getName()));
         productPojo.setBarcode(StringUtil.toLowerCase(productPojo.getBarcode()));
     }
+
+	
+
+	
 
 }

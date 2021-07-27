@@ -12,7 +12,7 @@ function getBrandUrlList(){
 //BUTTON ACTIONS
 function addBrand(event){
 	//Set the values to update
-
+	
 	var $form = $("#brand-add-form");
 	var json = toJson($form);
 	var check = validateBrand(json);
@@ -138,6 +138,7 @@ function uploadRows(){
                                 toastr.options.timeOut=0;
     	   		},
     	   error: function(response){
+    	   		row.error=response.responseText
                 console.log(response);
                 toastr.error("File cannot be uploaded: "+JSON.parse(response.responseText).message);
 
@@ -151,19 +152,107 @@ function downloadErrors(){
 
 //UI DISPLAY METHODS
 
-function displayBrandList(data){
+function displayBrandList(tabledata){
 	var $tbody = $('#brand-table').find('tbody');
 	$tbody.empty();
-	for(let i in data){
-		let e = data[i];
-		var buttonHtml = ' <button class="btn btn-primary" title="Edit brand" onclick="displayEditBrand(' + e.id + ')">Edit</button>';
-		var row = '<tr>'
-		+ '<td>' + e.brand + '</td>'
-		+ '<td>'  + e.category + '</td>'
-		+ '<td>' + buttonHtml + '</td>'
-		+ '</tr>';
-        $tbody.append(row);
+
+
+
+	var state = {
+		'querySet': tabledata,
+	
+		'page': 1,
+		'rows': 5,
+		'window': 5,
 	}
+	
+	buildTable()
+	
+	function pagination(querySet, page, rows) {
+	
+		var trimStart = (page - 1) * rows
+		var trimEnd = trimStart + rows
+	
+		var trimmedData = querySet.slice(trimStart, trimEnd)
+	
+		var pages = Math.round(querySet.length / rows);
+	
+		return {
+			'querySet': trimmedData,
+			'pages': pages,
+		}
+	}
+	
+	function pageButtons(pages) {
+		var wrapper = document.getElementById('pagination-wrapper')
+	
+		wrapper.innerHTML = ``
+		console.log('Pages:', pages)
+	
+		var maxLeft = (state.page - Math.floor(state.window / 2))
+		var maxRight = (state.page + Math.floor(state.window / 2))
+	
+		if (maxLeft < 1) {
+			maxLeft = 1
+			maxRight = state.window
+		}
+	
+		if (maxRight > pages) {
+			maxLeft = pages - (state.window - 1)
+			
+			if (maxLeft < 1){
+				maxLeft = 1
+			}
+			maxRight = pages
+		}
+		
+		
+	
+		for (var page = maxLeft; page <= maxRight; page++) {
+			wrapper.innerHTML += `<button value=${page} class="page btn btn-md btn-primary" >${page}</button>`
+		}
+	
+		if (state.page != 1) {
+			wrapper.innerHTML = `<button value=${1} class="page btn btn-md btn-primary">&#171; First</button>` + wrapper.innerHTML
+		}
+	
+		if (state.page != pages) {
+			wrapper.innerHTML += `<button value=${pages} class="page btn btn-md btn-primary">Last &#187;</button>`
+		}
+	
+		$('.page').on('click', function() {
+			$tbody.empty()
+	
+			state.page = Number($(this).val())
+	
+			buildTable()
+		})
+	
+	}
+	
+	
+	function buildTable() {
+		var table = $('#brand-table')
+	
+		var data = pagination(state.querySet, state.page, state.rows)
+		var myList = data.querySet
+	
+		for(let i in myList){
+			let e = myList[i];
+			var buttonHtml = ' <button class="btn btn-sm btn-primary" title="Edit brand" onclick="displayEditBrand(' + e.id + ')">Edit</button>';
+			var row = '<tr>'
+			+ '<td>' + e.brand + '</td>'
+			+ '<td>'  + e.category + '</td>'
+			+ '<td>' + buttonHtml + '</td>'
+			+ '</tr>';
+			$tbody.append(row);
+		}
+	
+		pageButtons(data.pages)
+	}
+
+
+	
 }
 
 function displayEditBrand(id){
@@ -176,6 +265,13 @@ function displayEditBrand(id){
 	   },
 	   error: handleAjaxError
 	});
+}
+function resetDialog()
+{
+var $i1 = $('#inputBrand');
+$i1.val('');
+var $i2 = $('#inputCategory');
+$i2.val('');
 }
 
 function resetUploadDialog(){
@@ -217,6 +313,10 @@ function displayBrand(data){
 }
 
 function displayAddBrand(){
+	var $i1 = $('#inputBrand');
+	$i1.val('');
+	var $i2 = $('#inputCategory');
+	$i2.val('');
     $('#add-brand-modal').modal('toggle');
 }
 
@@ -229,7 +329,6 @@ function init(){
 	$('#upload-data').click(displayUploadData);
 	$('#process-data').click(processData);
 	$('#close-upload').click(getBrandList);
-
     $('#brandFile').on('change', updateFileName);
 }
 

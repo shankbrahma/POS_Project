@@ -17,12 +17,12 @@
 			<fo:page-sequence master-reference="simpleA4">
 				<fo:flow flow-name="xsl-region-body">
 					<fo:block font-size="16pt" font-family="Helvetica"
-						color="black" font-weight="bold" space-after="5mm">
+						color="black" font-weight="bold" space-after="5mm" space-before="20pt">
 						Inventory Report
 					</fo:block>
-					<fo:block font-size="10pt">
+					<fo:block font-size="12pt" space-before="35pt">
 						<fo:table table-layout="fixed" width="100%"
-							border-collapse="separate">
+							border-collapse="separate" line-height="25px">
 							<fo:table-column column-width="5cm" />
 							<fo:table-column column-width="5cm" />
 							<fo:table-column column-width="5cm" />

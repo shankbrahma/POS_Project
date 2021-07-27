@@ -42,6 +42,7 @@ public class InventoryController extends ExceptionHandler{
     @RequestMapping(path = "/list", method = RequestMethod.POST)
     public void add(@RequestBody List<InventoryForm> inventoryFormList) throws ApiException {
         List<InventoryPojo> inventoryPojoList=new ArrayList<>();
+        productService.checkBarcodeExixtsOrNor(inventoryFormList);
         for(InventoryForm inventoryForm :inventoryFormList) {
             ProductPojo productPojo= productService.getFromBarcode(inventoryForm.getBarcode());
             InventoryPojo inventoryPojo= DataConversionUtil.convert(inventoryForm,productPojo);

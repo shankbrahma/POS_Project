@@ -150,7 +150,9 @@ public class DataConversionUtil {
             SaleReportData sales = new SaleReportData();
             sales.setBrand(brand.getBrand());
             sales.setCategory(brand.getCategory());
+            System.out.println(quantityPerBrandCategory);
             sales.setQuantity(quantityPerBrandCategory.get(brand));
+            System.out.println(revenuePerBrandCategory);
             sales.setRevenue(revenuePerBrandCategory.get(brand));
             sales_list.add(sales);
         }
