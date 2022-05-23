@@ -144,7 +144,7 @@ public class BrandService {
 		}
 		if(!hMapProducts.isEmpty())
 		{
-			throw new ApiException("The following brand and category combinations does not exixts: "+hMapProducts);
+			throw new ApiException("The following brand and category combinations does not exists: "+hMapProducts);
 		}
 	}
     

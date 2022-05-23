@@ -291,15 +291,15 @@ function displayOrdersList(tabledata) {
 		
 	
 		for (var page = maxLeft; page <= maxRight; page++) {
-			wrapper.innerHTML += `<button value=${page} class="page btn btn-md btn-primary" style="padding-left:5px;">${page}</button>`
+			wrapper.innerHTML += `<button value=${page} class="page btn btn-md btn-primary" style="margin: 0 2px;" >${page}</button>`
 		}
 	
 		if (state.page != 1) {
-			wrapper.innerHTML = `<button value=${1} class="page btn btn-md btn-primary" style="padding-left:10px;">&#171; First</button>` + wrapper.innerHTML
+			wrapper.innerHTML = `<button value=${1} class="page btn btn-md btn-primary" style="margin: 0 2px;">&#171; First</button>` + wrapper.innerHTML
 		}
 	
 		if (state.page != pages) {
-			wrapper.innerHTML += `<button value=${pages} class="page btn btn-md btn-primary">Last &#187;</button>`
+			wrapper.innerHTML += `<button value=${pages} class="page btn btn-md btn-primary" style="margin: 0 2px;">Last &#187;</button>`
 		}
 	
 		$('.page').on('click', function() {
@@ -327,19 +327,10 @@ function displayOrdersList(tabledata) {
 			+ '<td>'  + e.datetime + '</td>'
 			+'<td>' +buttonHtml +'</td>'
 			+ '</tr>';
-			// var row1='<tr>'
-			// + '<td> <button class="btn btn-sm btn-primary btnSend" id="addNewItem'+ e.id +'" onclick="displayAddOrderItemModal(' + e.id + ')" >Add Order Item</button>';
-			orderitemsHtml = '<td colspan="3"><div class="col-12"><table class="table table-striped orderItemRows' + e.id +'" style="display: none;" ><thead></thead><tbody></tbody></table></div></td>';
-			// orderitemsHtml1 = '<td><div class="col-12"><table class="table table-striped orderItemRows1' + e.id +'" style="display: none;" ><thead></thead><tbody></tbody></table></div></td>';
+			orderitemsHtml = '<td colspan="3"><div class="col-12"><table class="table table-striped table-hover orderItemRows' + e.id +'" style="display: none;" ><thead></thead><tbody></tbody></table></div></td>';
 			$tbody.append(row);
 			$tbody.append(orderitemsHtml);
 			getOrderItems(e.id,myList);
-			// if(e.isInvoiceGenerated)
-			// {
-			// 	console.log(e.isInvoiceGenerated);
-			// 	console.log($('#addNewItem'+ e.id +'')) ;
-			// 	$('#addNewItem'+e.id+'').attr('disabled',true);
-			// }
 		}
 	
 		pageButtons(data.pages)

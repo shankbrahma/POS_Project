@@ -16,6 +16,10 @@ body {
 .table td, .table th {
   padding:0rem;
 }
+
+tbody{
+  border-bottom: 2px solid rgb(172, 170, 170);
+}
 /* table { border-collapse: collapse; }
 thead {
     border-right: solid 3px black; 

@@ -272,15 +272,23 @@ function displayProductList(tabledata){
 		
 	
 		for (var page = maxLeft; page <= maxRight; page++) {
-			wrapper.innerHTML += `<button value=${page} class="page btn btn-md btn-primary">${page}</button>`
+			wrapper.innerHTML += `<button value=${page} class="page btn btn-md btn-primary" style="margin: 0 2px;">${page}</button>`
+		}
+		
+		for (var page = maxLeft; page <= maxRight; page++) {
+		if(page==state.page)
+		{
+			console.log(state.page);
+			$('#'+(state.page)).attr('disabled',true);
+		}
 		}
 	
 		if (state.page != 1) {
-			wrapper.innerHTML = `<button value=${1} class="page btn btn-md btn-primary">&#171; First</button>` + wrapper.innerHTML
+			wrapper.innerHTML = `<button value=${1} class="page btn btn-md btn-primary" style="margin: 0 2px;">&#171; First</button>` + wrapper.innerHTML
 		}
 	
 		if (state.page != pages) {
-			wrapper.innerHTML += `<button value=${pages} class="page btn btn-md btn-primary">Last &#187;</button>`
+			wrapper.innerHTML += `<button value=${pages} class="page btn btn-md btn-primary" style="margin: 0 2px;">Last &#187;</button>`
 		}
 	
 		$('.page').on('click', function() {

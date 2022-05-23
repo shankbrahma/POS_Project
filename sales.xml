@@ -3,16 +3,11 @@
     <sales_item>
         <brand>amul</brand>
         <category>milk</category>
-        <quantity>30</quantity>
+        <quantity>2</quantity>
     </sales_item>
     <sales_item>
         <brand>amul</brand>
         <category>butter</category>
-        <quantity>20</quantity>
-    </sales_item>
-    <sales_item>
-        <brand>nestle</brand>
-        <category>coffee</category>
-        <quantity>10</quantity>
+        <quantity>1</quantity>
     </sales_item>
 </sales_items>
